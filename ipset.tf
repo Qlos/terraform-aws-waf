@@ -1,6 +1,6 @@
 locals {
   ip_sets = {
-    for rule in coalesce(var.ip_set_reference_statement_rules, []) :
+    for rule in var.ip_set_reference_statement_rules :
     format("%s-ip-set", rule.name) => rule.statement.ip_set
     if try(rule.statement.ip_set, null) != null && try(rule.statement.arn, null) == null
   }

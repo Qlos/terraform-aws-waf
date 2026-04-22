@@ -57,7 +57,7 @@ variable "tags" {
 
 variable "ip_set_reference_statement_rules" {
   type        = any
-  default     = null
+  default     = []
   description = <<-EOT
     Rules that match on an IP set. Each rule either declares an inline ip_set
     (addresses + ip_address_version) which the module creates, or references an
@@ -75,7 +75,7 @@ variable "ip_set_reference_statement_rules" {
 
 variable "byte_match_statement_rules" {
   type        = any
-  default     = null
+  default     = []
   description = <<-EOT
     Rules that match a literal string against a part of the request.
 
@@ -94,7 +94,7 @@ variable "byte_match_statement_rules" {
 
 variable "regex_match_statement_rules" {
   type        = any
-  default     = null
+  default     = []
   description = <<-EOT
     Rules that match a regular expression against a part of the request.
 
@@ -112,7 +112,7 @@ variable "regex_match_statement_rules" {
 
 variable "managed_rule_group_statement_rules" {
   type        = any
-  default     = null
+  default     = []
   description = <<-EOT
     Rules that reference an AWS or marketplace managed rule group.
 

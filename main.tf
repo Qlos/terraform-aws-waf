@@ -10,22 +10,22 @@ locals {
   )
 
   ip_set_reference_statement_rules = {
-    for rule in coalesce(var.ip_set_reference_statement_rules, []) :
+    for rule in var.ip_set_reference_statement_rules :
     format("%s-ip-set", rule.name) => rule
   }
 
   byte_match_statement_rules = {
-    for rule in coalesce(var.byte_match_statement_rules, []) :
+    for rule in var.byte_match_statement_rules :
     rule.name => rule
   }
 
   regex_match_statement_rules = {
-    for rule in coalesce(var.regex_match_statement_rules, []) :
+    for rule in var.regex_match_statement_rules :
     rule.name => rule
   }
 
   managed_rule_group_statement_rules = {
-    for rule in coalesce(var.managed_rule_group_statement_rules, []) :
+    for rule in var.managed_rule_group_statement_rules :
     rule.name => rule
   }
 }
