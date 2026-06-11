@@ -119,7 +119,17 @@ variable "managed_rule_group_statement_rules" {
     Supported per-rule keys:
       name, priority,
       override_action (count | none, default none),
-      statement = { name, vendor_name, version (optional) },
+      statement = {
+        name, vendor_name, version (optional),
+        rule_action_overrides (optional) = list of {
+          name   = sub-rule name within the managed group
+          action = allow | block | count | captcha | challenge
+        }
+      },
       visibility_config
+
+    rule_action_overrides change the action of individual rules inside a
+    managed rule group without disabling the whole group - e.g. set
+    SizeRestrictions_BODY to "count" while the rest of the group keeps blocking.
   EOT
 }

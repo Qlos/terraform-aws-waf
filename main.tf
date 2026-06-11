@@ -333,6 +333,36 @@ resource "aws_wafv2_web_acl" "default" {
           name        = rule.value.statement.name
           vendor_name = rule.value.statement.vendor_name
           version     = lookup(rule.value.statement, "version", null)
+
+          dynamic "rule_action_override" {
+            for_each = lookup(rule.value.statement, "rule_action_overrides", [])
+            content {
+              name = rule_action_override.value.name
+
+              action_to_use {
+                dynamic "allow" {
+                  for_each = rule_action_override.value.action == "allow" ? [1] : []
+                  content {}
+                }
+                dynamic "block" {
+                  for_each = rule_action_override.value.action == "block" ? [1] : []
+                  content {}
+                }
+                dynamic "count" {
+                  for_each = rule_action_override.value.action == "count" ? [1] : []
+                  content {}
+                }
+                dynamic "captcha" {
+                  for_each = rule_action_override.value.action == "captcha" ? [1] : []
+                  content {}
+                }
+                dynamic "challenge" {
+                  for_each = rule_action_override.value.action == "challenge" ? [1] : []
+                  content {}
+                }
+              }
+            }
+          }
         }
       }
 
